@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/register.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Create Account</h2>
+        </div>
+        <form id="form" class="form" action="" method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" placeholder="username" name="username" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Email</label>
+                <input type="email" placeholder="email" name="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Password</label>
+                <input type="password" placeholder="Password" name="password"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Password check</label>
+                <input type="password" placeholder="Password again" name="password2"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+
+  <script src="/static/js/register.css"></script>  
+</body>
+</html>

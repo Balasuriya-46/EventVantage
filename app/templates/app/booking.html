@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /*Inspired by Basecamp Register form */
+
+@keyframes shake{
+    0%, 100% {
+      transform: translateX(0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Jolly+Lodger);
+
+body{
+  background-color: #3fb0da;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.8em
+}
+html{
+  height: 100%; 
+  width: 100%;
+}
+.container{
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+	width: 800px;
+  height: 400px;
+}
+
+.dolly{
+  position: relative;
+  width: 250px;
+  height: 450px;
+  float: left;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4848/dolly.jpg') no-repeat;
+}
+.error .dolly::before{
+	content: '';
+	display: block;
+	position: absolute;
+	top: 66px; right: -49px;
+	width: 205px;
+	height: 160px;
+	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4848/dolly_bad.jpg') no-repeat;
+}
+.dolly::after{
+  content: '';
+  display: block;
+  position: absolute;
+  
+  width: 170px;
+  height: 74px;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4848/arm.png') no-repeat;
+}
+
+[data-position='1'] .dolly::after{
+  top: 130px;
+  right: -70px;
+}
+[data-position='2'] .dolly::after{
+  top: 165px;
+  right: -62px;
+  transform: rotate(30deg);
+}
+[data-position='3'] .dolly::after{
+  top: 184px;
+  right: -40px;
+  transform: rotate(60deg);
+}
+
+
+.register{
+  width: 500px;
+  margin-top: 20px;
+  float: right;
+}
+
+.dolly .credit{
+    position: absolute;
+    bottom: 35px;
+    right: -10px;
+    font-size: 1em;
+    text-decoration: none;
+    color: #000;
+   
+}
+
+label {
+  display:block;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+  color: #7a3e1a;
+}
+.input-txt{
+  box-sizing: border-box;
+  padding: .4rem .9rem;
+  width: 300px;
+  margin-bottom: 1rem;
+  border: 1px solid #3fb0da;
+  color: #444;
+  border-radius: 4px;
+  font-size: 1.3em;
+}
+.error .input-txt:focus{
+  border: 1px solid red;
+  animation: shake .65s;
+}
+button[type=submit]{
+  box-sizing: border-box;
+  display:block;
+  padding: 8px 30px 10px 30px;
+  margin-top: 10px;
+  width: 300px;
+  text-shadow: 0 1px 1px #fff;
+  border: 1px solid #7f3f1b;
+  border-radius: 4px;
+  color: #7a3e1a;
+  font-size: 1.2em;
+  background-image: linear-gradient(#e4d730,#998002);
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Lot</title>
+</head>
+<body>
+    
+    
+  
+	<div class="container" data-position="1">
+
+	  
+
+        <div class="register">
+        
+          <h1 class="register-heading">Register </h1>
+            
+          <form id="form" action="" method="POST">
+            {% csrf_token %}
+            
+                <label for="name">Department</label>
+                <input type="text" 
+                    name="department"  
+                    class="input-txt" data-pos="1" required/>
+                <label for="car">Event</label>
+                <input type="text" 
+                    name="event"  
+                    minlength="5"
+                    class="input-txt" data-pos="2" required/>
+                <label for="license">Date</label>
+                <input type="date" 
+                    name="date" 
+                    minlength="5"
+                    class="input-txt" data-pos="3" required/>
+                <label for="intime">Start Time</label>
+                <input type="time" 
+                    name="starttime" 
+                    minlength="5"
+                    class="input-txt" data-pos="3" required/>
+                <label for="outtime">End Time</label>
+                <input type="time" 
+                    name="endtime" 
+                    minlength="5"
+                    class="input-txt" data-pos="3" required/>
+  
+              <button type="submit"> SUBMIT </button>
+          </form>
+  
+        </div>
+  
+      </div>
+  
+  <script>
+    (function() {
+  jQuery(function() {
+    $('.input-txt').on('focus', function() {
+      var $container, $this, nPosition;
+      $container = $('.container');
+      $this = $(this);
+      nPosition = $this.data('pos');
+      return $container.attr('data-position', nPosition);
+    });
+    $('.input-txt').bind('invalid', function() {
+      return $('.container').addClass('error');
+    });
+    return $('.input-txt').bind('blur', function() {
+      return $('.container').removeClass('error');
+    });
+  });
+
+}).call(this);
+  </script>
+  
+</body>
+</html>
